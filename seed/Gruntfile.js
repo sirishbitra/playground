@@ -7,6 +7,8 @@ module.exports = function (grunt) {
     // Show grunt task time
     require('time-grunt')(grunt);
 
+    // require('grunt-ng-annotate')(grunt);
+
     // Configurable paths for the app
     var appConfig = {
         app: 'app',
@@ -382,6 +384,11 @@ module.exports = function (grunt) {
         },
         usemin: {
             html: ['<%= bitraz.dist.index %>/index.html', '<%= bitraz.dist.admin %>/admin.html', '<%= bitraz.dist.analytics %>/analytics.html'],
+        },
+        ngAnnotate:{
+            options: {
+                singleQuotes: true,
+            }
         }
     });
 
@@ -413,6 +420,7 @@ module.exports = function (grunt) {
         'less',
         'useminPrepare:index',
         'concat',
+        'ngAnnotate',
         'babel',
         'copy:index',
         'cssmin',
@@ -427,6 +435,7 @@ module.exports = function (grunt) {
         'less',
         'useminPrepare:admin',
         'concat',
+        'ngAnnotate',
         'babel',
         'copy:admin',
         'cssmin',
@@ -441,6 +450,7 @@ module.exports = function (grunt) {
         'less',
         'useminPrepare:analytics',
         'concat',
+        'ngAnnotate',
         'babel',
         'copy:analytics',
         'cssmin',

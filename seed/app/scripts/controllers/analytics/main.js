@@ -5,7 +5,7 @@
  */
 
 angular
-    .module('bitraz')
+    .module('bitraz.controllers', [])
     .controller('appCtrl', appCtrl)
     .controller('AppController', AppController)
     .controller('HeaderController', HeaderController)
@@ -18,8 +18,8 @@ angular
 
 
 function AppController($http, $scope) {}
-function HeaderController($rootScope, $scope, $state) {
-  console.log('HeaderController', $state)
+function HeaderController($rootScope, $scope, $state, AuthService, appConfig) {
+  console.log('HeaderController', $state, AuthService, appConfig)
   $scope.active = $state.current.data.activeMenu;
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams, fromState, fromStateParams) {

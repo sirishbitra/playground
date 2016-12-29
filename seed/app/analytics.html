@@ -54,49 +54,55 @@
 
 
 <!-- build:js(.) scripts/vendor.js -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/highcharts/js/highstock.js"></script>
-<script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="bower_components/angular-aria/angular-aria.min.js"></script>
-<script src="bower_components/angular-cache/dist/angular-cache.min.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-<script src="bower_components/angular-messages/angular-messages.min.js"></script>
-<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-<script src="bower_components/angular-touch/angular-touch.min.js"></script>
-<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-cache/dist/angular-cache.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-ui-grid/ui-grid.js"></script>
 
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-<script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="bower_components/metisMenu/dist/metisMenu.js"></script>
 <script src="bower_components/moment/moment.js"></script>
-<!--<script src="bower_components/highcharts/js/highmaps.js"></script>-->
 <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
 <script src="bower_components/highcharts/highcharts-more.js"></script>
-<!--<script src="bower_components/highcharts/modules/data.js"></script>-->
 <script src="bower_components/highcharts/modules/map.js"></script>
 <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
 <script src="bower_components/highcharts/js/themes/dark-blue.js"></script>
 
-
-<!-- endbuild -->
 <script src="scripts/utils/ext/world.js"></script>
+<!-- endbuild -->
 
-<!--<script src="http://code.highcharts.com/mapdata/custom/world.js"></script>-->
+
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/utils/utils.js"></script>
 <script src="scripts/app.js"></script>
 <script src="scripts/analytics_routes.js"></script>
-<script src="scripts/directives/common/directives.js"></script>
 <script src="scripts/controllers/analytics/main.js"></script>
-<script src="scripts/models/common/models.js"></script>
+
+<script src="scripts/models/analytics/analytics_models.js"></script>
+<script src="scripts/models/common/common_models.js"></script>
+
+<script src="scripts/directives/analytics/analytics_directives.js"></script>
+<script src="scripts/directives/common/common_directives.js"></script>
+
+
+<script src="scripts/services/analytics/analytics_services.js"></script>
+<script src="scripts/services/common/auth_service.js"></script>
+
 <script src="scripts/directives/common/analytics/layout/analytics_layout.js"></script>
 <script src="scripts/directives/common/analytics/activity/layout/activity_layout.js"></script>
 <script src="scripts/directives/common/analytics/overview/activity_overview.js"></script>

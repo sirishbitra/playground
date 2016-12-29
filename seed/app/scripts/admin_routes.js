@@ -1,6 +1,18 @@
-angular
-  .module('bitraz')
-  .config(["$stateProvider", "$httpProvider", "$compileProvider",
+angular.module('routes', [
+  "ui.router",
+  'ngAnimate',
+  'ngAria',
+  'ngCookies',
+  'ngMessages',
+  'ngSanitize',
+  'ngTouch',               // Angular flexible routing
+  'ui.bootstrap',             // AngularJS native directives for Bootstrap
+  'ui.grid',
+  'ui.bootstrap.modal',
+  'ui.bootstrap.tpls',
+  'daterangepicker',
+  'highcharts-ng'
+]).config(["$stateProvider", "$httpProvider", "$compileProvider",
     "$urlRouterProvider", "$urlMatcherFactoryProvider",
     function ($stateProvider, $httpProvider, $compileProvider, $urlRouterProvider,
               $urlMatcherFactoryProvider) {

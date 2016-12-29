@@ -1,6 +1,6 @@
 angular.module("bitraz")
   .component("analyticsLayout", {
-    templateUrl: "scripts/directives/common/analytics/layout/analytics_layout.html",
+    templateUrl: "views/common/directives/analytics_layout.html",
     bindings: {
       campaignId: "<"
     },

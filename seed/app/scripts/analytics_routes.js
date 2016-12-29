@@ -116,8 +116,21 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
     })
 }
 
-angular
-  .module('bitraz')
+angular.module('routes', [
+  "ui.router",
+  'ngAnimate',
+  'ngAria',
+  'ngCookies',
+  'ngMessages',
+  'ngSanitize',
+  'ngTouch',               // Angular flexible routing
+  'ui.bootstrap',             // AngularJS native directives for Bootstrap
+  'ui.grid',
+  'ui.bootstrap.modal',
+  'ui.bootstrap.tpls',
+  'daterangepicker',
+  'highcharts-ng'
+])
   .config(configState)
   .run(function($rootScope, $state) {
     $rootScope.$state = $state;

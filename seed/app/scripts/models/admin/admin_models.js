@@ -1,4 +1,4 @@
-angular.module('bitraz')
+angular.module('bitraz.models', ['bitraz.models.common'])
   .factory('UsersCollectionModel', ['$http', '$q', 'appConfig', 'UserModel', function($http, $q, appConfig, UserModel) {
     "use strict";
     class Users {
