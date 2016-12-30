@@ -11,7 +11,8 @@ angular.module('routes', [
   'ui.bootstrap.modal',
   'ui.bootstrap.tpls',
   'daterangepicker',
-  'highcharts-ng'
+  'highcharts-ng',
+  "bitraz.template"
 ]).config(["$stateProvider", "$httpProvider", "$compileProvider",
     "$urlRouterProvider", "$urlMatcherFactoryProvider",
     function ($stateProvider, $httpProvider, $compileProvider, $urlRouterProvider,

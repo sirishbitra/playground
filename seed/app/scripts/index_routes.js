@@ -120,7 +120,8 @@ angular.module('routes', [
   'ui.bootstrap.modal',
   'ui.bootstrap.tpls',
   'daterangepicker',
-  'highcharts-ng'
+  'highcharts-ng',
+  "bitraz.template"
 ])
     .config(configState)
     .run(function($rootScope, $state) {

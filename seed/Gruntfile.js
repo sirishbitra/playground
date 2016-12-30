@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     // Show grunt task time
     require('time-grunt')(grunt);
 
-    // require('grunt-ng-annotate')(grunt);
+    require('grunt-html2js')(grunt);
 
     // Configurable paths for the app
     var appConfig = {
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     open: true,
-                    base: '<%= bitraz.dist %>'
+                    base: 'dist/'
                 }
             }
         },
@@ -99,46 +99,6 @@ module.exports = function (grunt) {
                         '.tmp/concat/scripts/scripts.js': '.tmp/concat/scripts/scripts.js'
                     }
                 }
-
-            /*admin: {
-                options: {
-                    sourceMap: true,
-                    presets: ['es2015']
-                },
-                dist: {
-                    files: {
-                        '.tmp/concat/scripts/_scripts.js': '.tmp/concat/scripts/scripts.js'
-                    }
-                }
-            },
-            index: {
-                options: {
-                    sourceMap: true,
-                    presets: ['es2015']
-                },
-                dist: {
-                    files: [{
-                        expand: true,
-                        cwd: '<%= bitraz.app %>',
-                        src: ['<%= bitraz.dist.index %>/scripts/{,*!/}*.js'],
-                        dest: '<%= bitraz.dist.index %>'
-                    }]
-                }
-            },
-            analytics: {
-                options: {
-                    sourceMap: true,
-                    presets: ['es2015']
-                },
-                dist: {
-                    files: [{
-                        expand: true,
-                        cwd: '<%= bitraz.app %>',
-                        src: ['<%= bitraz.dist.analytics %>/scripts/{,*!/}*.js'],
-                        dest: '<%= bitraz.dist.analytics %>'
-                    }]
-                }
-            }*/
         },
         uglify: {
             options: {
@@ -196,6 +156,13 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dot: true,
+                        cwd: 'bower_components/angular-ui-grid',
+                        src: ['*.eot', '*.svg', '*.ttf', '*.woff'],
+                        dest: '<%= bitraz.dist.index %>/styles'
+                    },
+                    {
+                        expand: true,
+                        dot: true,
                         cwd: 'app/fonts/pe-icon-7-stroke/',
                         src: ['fonts/*.*'],
                         dest: '<%= bitraz.dist.index %>'
@@ -237,6 +204,13 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dot: true,
+                        cwd: 'bower_components/angular-ui-grid',
+                        src: ['*.eot', '*.svg', '*.ttf', '*.woff'],
+                        dest: '<%= bitraz.dist.admin %>/styles'
+                    },
+                    {
+                        expand: true,
+                        dot: true,
                         cwd: 'app/fonts/pe-icon-7-stroke/',
                         src: ['fonts/*.*'],
                         dest: '<%= bitraz.dist.admin %>'
@@ -274,6 +248,12 @@ module.exports = function (grunt) {
                         cwd: 'bower_components/bootstrap',
                         src: ['fonts/*.*'],
                         dest: '<%= bitraz.dist.analytics %>'
+                    },{
+                        expand: true,
+                        dot: true,
+                        cwd: 'bower_components/angular-ui-grid',
+                        src: ['*.eot', '*.svg', '*.ttf', '*.woff'],
+                        dest: '<%= bitraz.dist.analytics %>/styles'
                     },
                     {
                         expand: true,
@@ -389,6 +369,36 @@ module.exports = function (grunt) {
             options: {
                 singleQuotes: true,
             }
+        },
+        html2js:  {
+            index:{
+                options: {
+                    base: '<%= bitraz.dist.index %>'
+                },
+                src: ['<%= bitraz.dist.index %>/views/**/**.html'],
+                dest: '<%= bitraz.dist.index %>/scripts/templates.js',
+                module: 'bitraz.template'
+
+            },
+            admin:{
+                options: {
+                    base: '<%= bitraz.dist.admin %>'
+                },
+                src: ['<%= bitraz.dist.admin %>/views/**/**.html'],
+                dest: '<%= bitraz.dist.admin %>/scripts/templates.js',
+                module: 'bitraz.template'
+
+            },
+            analytics:{
+                options: {
+                    base: '<%= bitraz.dist.analytics %>'
+                },
+                src: ['<%= bitraz.dist.analytics %>/views/**/**.html'],
+                dest: '<%= bitraz.dist.analytics %>/scripts/templates.js',
+                module: 'bitraz.template'
+
+            },
+
         }
     });
 
@@ -406,15 +416,6 @@ module.exports = function (grunt) {
         'connect:dist:keepalive'
     ]);
 
-    // grunt.registerTask('buildAll', [
-    //     'clean:dist',
-    //     'less',
-    //     'buildIndex',
-    //     'buildAdmin',
-    //     'buildAnalytics'
-    //
-    // ]);
-
     grunt.registerTask('buildIndex', [
         'clean:dist',
         'less',
@@ -427,7 +428,8 @@ module.exports = function (grunt) {
         'uglify',
         // 'filerev:index',
         'usemin:html:index',
-        'htmlmin:index'
+        'htmlmin:index',
+        'html2js:index'
     ]);
 
     grunt.registerTask('buildAdmin', [
@@ -442,7 +444,8 @@ module.exports = function (grunt) {
         'uglify',
         // 'filerev:index',
         'usemin:html:admin',
-        'htmlmin:admin'
+        'htmlmin:admin',
+        'html2js:admin'
     ]);
 
     grunt.registerTask('buildAnalytics', [
@@ -457,7 +460,8 @@ module.exports = function (grunt) {
         'uglify',
         // 'filerev:index',
         'usemin:html:analytics  ',
-        'htmlmin:analytics'
+        'htmlmin:analytics',
+        'html2js:analytics'
     ]);
 
 };
