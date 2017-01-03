@@ -38,7 +38,7 @@ angular.module('bitraz.models', ['bitraz.models.common'])
         this.Email = data.Email;
         this.IsActive = data.IsActive || false;
       }
-
+ 
       save(){
         var refDefer = $q.defer();
 

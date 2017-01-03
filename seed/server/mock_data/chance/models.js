@@ -10,6 +10,8 @@ exports.adminUserModel = function(){
       "IsActive": chance.bool()
     }
 };
+
+
 //
 // exports.accusedProductModel = function(){
 //     return {

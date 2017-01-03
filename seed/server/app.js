@@ -57,6 +57,24 @@ app.all("*", function (req, res, next) {
    var users = require("./mock_data/chance/admin/users");
    res.json( users.get() );
   }
+  else if( /\/api\/rid\/info\/\d*$/.exec(p)){
+    var rid = require("./mock_data/chance/rid");
+    res.json( rid.get() );
+  }
+ else if( /\/api\/rid\/validate\/\d*$/.exec(p)){
+    var rid = require("./mock_data/chance/rid");
+    res.json( rid.post() );
+  }
+
+ else if( /\/api\/Analytics\/GETSUMMARY/.exec(p)){
+   var rid = require("./mock_data/chance/analytics");
+   res.json( rid.getSummary() );
+ }
+
+ else if( /\/api\/Analytics\/GETALLCOUNTS/.exec(p)){
+   var rid = require("./mock_data/chance/analytics");
+   res.json( rid.getCounts() );
+ }
   else{
     console.log("P:" + p + req.query.portfolio);
     res.sendFile( "index.html", {root: ".", headers: accessObject} );

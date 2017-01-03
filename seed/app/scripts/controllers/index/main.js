@@ -13,7 +13,8 @@ angular
     .controller('ClientController', ClientController)
     .controller('ContactController', ContactController)
     .controller('FeatureController', FeatureController)
-    .controller('LoginController', LoginController);
+    .controller('LoginController', LoginController)
+    .controller('AnalyticsController', AnalyticsController);
 
 
 function AppController($http, $scope) {}
@@ -33,6 +34,53 @@ function FeatureController($http, $scope) {}
 function HomeController($http, $scope) {}
 function appCtrl($http, $scope) {
   console.log($scope, $http)
+}
+
+function AnalyticsController($http, $scope, RidService, $state, $timeout) {
+  $scope.rid = {};
+  $scope.isLoaded = false;
+  $scope.init = () => {
+    $scope.rid.id = $state.params.rid || null;
+    $scope.hasAuthentication = false;
+    $scope.isAuthorized = false;
+
+    if($scope.rid.id){
+      $scope.validateRid();
+    }else{
+      $scope.isLoaded = true;
+    }
+  };
+
+  $scope.validateRid = (model = {id:$scope.rid.id}) => {
+    $scope.error = '';
+    if(!$scope.isAuthorized && $scope.hasAuthentication && model.password){
+      RidService.validate(model).$promise.then((resp) => {
+        $scope.isLoaded = true;
+        $scope.isAuthorized = resp.success ? true: false;
+        if(!$scope.isAuthorized){
+          $scope.error = 'Invalid Authorization';
+        }
+      }, (err) => {
+        $scope.isLoaded = true;
+        $scope.error = 'Something is Wrong!';
+        console.log("failed to validate reference id.");
+      })
+    }else if(!$scope.isAuthorized){
+      RidService.getInfo({id: model.id}).$promise.then((resp) => {
+        $state.go('.', {rid: model.id});
+        $scope.isLoaded = true;
+        $scope.hasAuthentication = !!resp.has_authentication;
+        $scope.isAuthorized = !!resp.is_authorized;
+      }, (err) => {
+        $scope.isLoaded = true;
+        console.log("failed to get reference id info");
+        $scope.error = 'Something is Wrong!';
+      });
+    }else{
+      $scope.isLoaded = true;
+    }
+  };
+  $scope.init()
 }
 
 

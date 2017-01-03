@@ -91,7 +91,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
               controller: "ContactController"
             }
           }
-        }).state('bitraz.main.login', {
+        })
+        .state('bitraz.main.login', {
           url: "/login",
           data: {
             pageTitle: 'Login',
@@ -102,6 +103,21 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
             "body@bitraz": {
               templateUrl: "views/index/login.html",
               controller: "LoginController"
+            }
+          }
+        })
+        .state('bitraz.main.analytics', {
+          url: "/analytics?rid",
+          data: {
+            pageTitle: 'Analytics',
+            specialClass: 'landing-page',
+            activeMenu:'analytics'
+          },
+
+          views: {
+            "body@bitraz": {
+              templateUrl: "views/index/analytics.html",
+              controller: "AnalyticsController"
             }
           }
         })
@@ -121,9 +137,11 @@ angular.module('routes', [
   'ui.bootstrap.tpls',
   'daterangepicker',
   'highcharts-ng',
+  'bitraz.rid',
   "bitraz.template"
 ])
     .config(configState)
-    .run(function($rootScope, $state) {
+    .run(function($rootScope, $state, appConfig) {
         $rootScope.$state = $state;
+        $rootScope.userInfo = appConfig.userInfo;
     });

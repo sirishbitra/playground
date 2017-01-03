@@ -1,4 +1,4 @@
-angular.module('bitraz.template', ['views/common/dashboard/dashboard_tmpl.html', 'views/common/directives/analytics_layout.html', 'views/common/header-dashboard.html', 'views/common/navigation.html', 'views/common/panel_tools.html', 'views/index/clients.html', 'views/index/contact.html', 'views/index/features.html', 'views/index/index.html', 'views/index/index_header.html', 'views/index/login.html']);
+angular.module('bitraz.template', ['views/common/dashboard/dashboard_tmpl.html', 'views/common/directives/analytics_layout.html', 'views/common/header-dashboard.html', 'views/common/navigation.html', 'views/common/panel_tools.html', 'views/index/analytics.html', 'views/index/clients.html', 'views/index/contact.html', 'views/index/features.html', 'views/index/index.html', 'views/index/index_header.html', 'views/index/login.html']);
 
 angular.module("views/common/dashboard/dashboard_tmpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("views/common/dashboard/dashboard_tmpl.html",
@@ -7,24 +7,27 @@ angular.module("views/common/dashboard/dashboard_tmpl.html", []).run(["$template
 
 angular.module("views/common/directives/analytics_layout.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("views/common/directives/analytics_layout.html",
-    "<section class=\"anlaytics-layout-container \">\n" +
+    "<section class=\"anlaytics-layout-container \" style=\"padding-top:0px;\">\n" +
+    "    <div class=\"refresh-block pull-right\" style=\"padding-bottom: 5px;\">\n" +
+    "        View Refreshes in {{$ctrl.timeLeft}} Seconds <a ng-click=\"$ctrl.resetTime()\"><i class=\"fa fa-refresh\"></i></a>\n" +
+    "    </div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"panel panel-default\">\n" +
     "                <div class=\"panel-body tile_count\">\n" +
     "                    <div class=\"col-md-4 col-sm-4 col-xs-4 tile_stats_count\">\n" +
     "                        <span class=\"count_top\"><i class=\"fa fa-eye\"></i> Total Visits</span>\n" +
-    "                        <div class=\"count\" id=\"visits_total\">0</div>\n" +
+    "                        <div class=\"count\" id=\"visits_total\">{{$ctrl.summary.visits}}</div>\n" +
     "                        <span class=\"count_bottom\"><i class=\"green\"><span id=\"visits_percentage\"></span>% </i> From last day</span>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-4 col-sm-4 col-xs-4 tile_stats_count\">\n" +
     "                        <span class=\"count_top\"><i class=\"fa fa-user\"></i> Unique User Visits</span>\n" +
-    "                        <div class=\"count\" id=\"unique_users_total\">0</div>\n" +
+    "                        <div class=\"count\" id=\"unique_users_total\">{{$ctrl.summary.unique_users}}</div>\n" +
     "                        <span class=\"count_bottom\"><i class=\"green\"><span id=\"unique_users_percentage\"></span>% </i> From last day</span>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-4 col-sm-4 col-xs-4 tile_stats_count\">\n" +
     "                        <span class=\"count_top\"><i class=\"fa fa-users\"></i> Total Users</span>\n" +
-    "                        <div class=\"count green\" id=\"total_users\">0</div>\n" +
+    "                        <div class=\"count green\" id=\"total_users\">{{$ctrl.summary.total_users}}</div>\n" +
     "                        <span class=\"count_bottom\">&nbsp;</span>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -34,7 +37,7 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"panel panel-default\">\n" +
-    "                <div class=\"row\">\n" +
+    "                <div class=\"panel-body\">\n" +
     "                    <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "                        <div class=\"dashboard_graph\">\n" +
     "\n" +
@@ -69,7 +72,7 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"panel panel-default\">\n" +
-    "                <div class=\"row\">\n" +
+    "                <div class=\"panel-body\">\n" +
     "                    <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "                        <div class=\"dashboard_graph\">\n" +
     "\n" +
@@ -84,12 +87,6 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "                                    <highchart id=\"world-map-gdp\" config=\"locationConfig\" class=\"columnscol-md-12 col-sm-12 col-xs-12\" style=\"height: 400px\">\n" +
     "\n" +
     "                                    </highchart>\n" +
-    "                                    <!--<div id=\"world-map-gdp2\" class=\"columnscol-md-12 col-sm-12 col-xs-12\" style=\"height: 400px\" >-->\n" +
-    "                                        <!--<div class=\"loading\">-->\n" +
-    "                                            <!--<i class=\"icon-spinner icon-spin icon-large\"></i>-->\n" +
-    "                                            <!--Loading data from Google Spreadsheets...-->\n" +
-    "                                        <!--</div>-->\n" +
-    "                                    <!--</div>-->\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "\n" +
@@ -104,20 +101,20 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"panel panel-default\">\n" +
-    "                <div class=\"row\">\n" +
+    "                <div class=\"panel-body\">\n" +
     "                    <div class=\"col-md-6 col-sm-6 col-xs-6\">\n" +
     "                        <div class=\"dashboard_graph \">\n" +
     "\n" +
     "                            <div class=\"row x_title\">\n" +
-    "                                <div class=\"col-md-12\">\n" +
+    "                                <div class=\"col-md-12 text-center\">\n" +
     "                                    <h3>Devices</h3>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"row\">\n" +
     "                                <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
-    "                                    <div id=\"placeholder33\" style=\"height: 260px; display: none\" class=\"demo-placeholder\"></div>\n" +
+    "                                    <!--<div id=\"placeholder33\" style=\"height: 360px; display: none\" class=\"demo-placeholder\"></div>-->\n" +
     "                                    <div style=\"width: 100%;\">\n" +
-    "                                        <highchart id=\"devices-chart\" config=\"deviceConfig\" class=\"col-md-8 col-sm-12 col-xs-12\" style=\"height:230px;\"></highchart>\n" +
+    "                                        <highchart id=\"devices-chart\" config=\"deviceConfig\"  style=\"height:300px;\"></highchart>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
@@ -129,15 +126,15 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "                        <div class=\"dashboard_graph \">\n" +
     "\n" +
     "                            <div class=\"row x_title\">\n" +
-    "                                <div class=\"col-md-12\">\n" +
+    "                                <div class=\"col-md-12 text-center\">\n" +
     "                                    <h3>Platforms</h3>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"row\">\n" +
     "                                <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
-    "                                    <div id=\"placeholder33\" style=\"height: 260px; display: none\" class=\"demo-placeholder\"></div>\n" +
+    "                                    <!--<div id=\"placeholder33\" style=\"height: 360px; display: none\" class=\"demo-placeholder\"></div>-->\n" +
     "                                    <div style=\"width: 100%;\">\n" +
-    "                                        <highchart id=\"platform-chart\" config=\"platformConfig\" class=\"col-md-8 col-sm-12 col-xs-12\" style=\"height:230px;\"></highchart>\n" +
+    "                                        <highchart id=\"platform-chart\" config=\"platformConfig\" style=\"height:300px;\"></highchart>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
@@ -167,6 +164,11 @@ angular.module("views/common/panel_tools.html", []).run(["$templateCache", funct
     "<!-- This is template for panel tools --><!-- It contains collapse function (showhide) and close function (closebox) --><!-- All function is handled from directive panelTools in directives.js file --> <div class=\"panel-tools\"> <a ng-click=\"showhide()\"><i class=\"fa fa-chevron-up\"></i></a> <a ng-click=\"closebox()\"><i class=\"fa fa-times\"></i></a> </div>");
 }]);
 
+angular.module("views/index/analytics.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/index/analytics.html",
+    "<div id=\"wrapper\"> <div class=\"content\" animate-panel effect=\"zoomIn\"> <div class=\"row\" ng-show=\"isLoaded\"> <div ng-if=\"!isAuthorized\"> <p>1.Ask for RID before showing analytics</p> <p>2.Validate rid, if authentication is required ask for password. else proceed</p> <form novalidate name=\"ridRequest\"> <div class=\"col-sm-12\"> <div class=\"row\"> <label>Reference Id: <input type=\"text\" name=\"referenceId\" ng-model=\"rid.id\" ng-required=\"true\" ng-change=\"\"></label> </div> <div class=\"row\" ng-if=\"hasAuthentication\"> <label>Password: <input type=\"password\" name=\"referencePswd\" ng-model=\"rid.password\" ng-required=\"true\"></label> </div> <div class=\"row\"> <label><input type=\"submit\" ng-click=\"validateRid(rid)\" value=\"Save\"></label> </div> <span class=\"text-danger\" ng-if=\"error\"> error: {{error}}</span> </div> </form> </div> <div ng-if=\"isAuthorized\"> <analytics-layout campaign-id=\"rid.id\"></analytics-layout> </div> </div> <div class=\"row\" ng-hide=\"isLoaded\"> <div class=\"splash-title\"> <h1>Loading..</h1> <p></p> <img src=\"images/loading-bars.svg\" width=\"64\" height=\"64\"></div> </div> </div> </div>");
+}]);
+
 angular.module("views/index/clients.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("views/index/clients.html",
     "<!-- Main Wrapper --> <div id=\"wrapper\"> <div class=\"content\" animate-panel effect=\"zoomIn\"> <div class=\"row\"> <div class=\"col-lg-12 text-center m-t-md\"> <h2> Welcome to biTRAZ 4 </h2> <p>Special <strong>Analytic Trace Application</strong> for your mobile marketing campaigns.</p> </div> </div> </div> </div>");
@@ -184,12 +186,12 @@ angular.module("views/index/features.html", []).run(["$templateCache", function(
 
 angular.module("views/index/index.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("views/index/index.html",
-    "<!-- Main Wrapper --> <div id=\"wrapper\"> <div class=\"content\" animate-panel effect=\"zoomIn\"> <div class=\"row\"> <div class=\"col-lg-12 text-center m-t-md\"> <h2> Welcome to biTRAZ 1 </h2> <p>Special <strong>Analytic Trace Application</strong> for your mobile marketing campaigns.</p> </div> </div> </div> </div>");
+    "<!-- Main Wrapper --> <div id=\"wrapper\"> <div class=\"content\" animate-panel effect=\"zoomIn\"> <div class=\"row\"> <div class=\"col-lg-12 text-center m-t-md\"> <h2> Welcome to biTRAZ 1 </h2> <p>Special <strong>Analytic Trace Application</strong> for your mobile marketing campaigns.</p> <p> <a ui-sref=\"bitraz.main.analytics\">Analytics Page</a> </p> </div> </div> </div> </div>");
 }]);
 
 angular.module("views/index/index_header.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("views/index/index_header.html",
-    "<div id=\"logo\" class=\"light-version\" href=\"#\"> <a ng-href=\"#\"><span> bi <span class=\"part2\">TRAZ</span> </span></a> </div> <nav role=\"navigation\"> <!-- <minimaliza-menu></minimaliza-menu> --> <div class=\"small-logo\" ng-href=\"#\"> <a ng-href=\"#\"><span class=\"text-primary\">bi <span class=\"part2\">TRAZ</span></span></a> </div> <div class=\"mobile-menu\"> <button type=\"button\" class=\"navbar-toggle mobile-menu-toggle\" data-toggle=\"collapse\" data-target=\"#mobile-collapse\"> <i class=\"fa fa-chevron-down\"></i> </button> <div class=\"collapse mobile-navbar\" id=\"mobile-collapse\"> <ul class=\"nav navbar-nav\"> <li ng-class=\"{'active':active == 'home'}\"><a class=\"page-scroll\" ui-sref=\"bitraz.main.index\">Home</a></li> <li ng-class=\"{'active':active == 'features'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.features\">Features</a></li> <li ng-class=\"{'active':active == 'clients'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.clients\">Clients </a></li> <li ng-class=\"{'active':active == 'contact'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.contact\">Contact</a></li> <li ng-class=\"{'active':active == 'login'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.login\">Sign In</a></li> </ul> </div> </div> <div class=\"navbar-default\"> <div class=\"navbar-right\"> <ul class=\"nav navbar-nav no-borders\"> <li ng-class=\"{'active':active == 'home'}\"><a class=\"page-scroll\" ui-sref=\"bitraz.main.index\">Home</a></li> <li ng-class=\"{'active':active == 'features'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.features\">Features</a></li> <li ng-class=\"{'active':active == 'clients'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.clients\">Clients </a></li> <li ng-class=\"{'active':active == 'contact'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.contact\">Contact</a></li> <li ng-class=\"{'active':active == 'login'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.login\">Sign In</a></li> </ul> </div> </div> </nav>");
+    "<div id=\"logo\" class=\"light-version\" href=\"#\"> <a ng-href=\"#\"><span> bi <span class=\"part2\">TRAZ</span> </span></a> </div> <nav role=\"navigation\"> <!-- <minimaliza-menu></minimaliza-menu> --> <div class=\"small-logo\" ng-href=\"#\"> <a ng-href=\"#\"><span class=\"text-primary\">bi <span class=\"part2\">TRAZ</span></span></a> </div> <div class=\"mobile-menu\"> <button type=\"button\" class=\"navbar-toggle mobile-menu-toggle\" data-toggle=\"collapse\" data-target=\"#mobile-collapse\"> <i class=\"fa fa-chevron-down\"></i> </button> <div class=\"collapse mobile-navbar\" id=\"mobile-collapse\"> <ul class=\"nav navbar-nav\"> <li ng-class=\"{'active':active == 'home'}\"><a class=\"page-scroll\" ui-sref=\"bitraz.main.index\">Home</a></li> <li ng-class=\"{'active':active == 'features'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.features\">Features</a></li> <li ng-class=\"{'active':active == 'clients'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.clients\">Clients </a></li> <li ng-class=\"{'active':active == 'contact'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.contact\">Contact</a></li> <li ng-class=\"{'active':active == 'login'}\" ng-show=\"!$root.userInfo || !$root.userInfo.Id\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.login\">Sign In</a></li> <li ng-class=\"{'active':active == 'logout'}\" ng-show=\"$root.userInfo && $root.userInfo.Id\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.login\">Log Out</a></li> </ul> </div> </div> <div class=\"navbar-default\"> <div class=\"navbar-right\"> <ul class=\"nav navbar-nav no-borders\"> <li ng-class=\"{'active':active == 'home'}\"><a class=\"page-scroll\" ui-sref=\"bitraz.main.index\">Home</a></li> <li ng-class=\"{'active':active == 'features'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.features\">Features</a></li> <li ng-class=\"{'active':active == 'clients'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.clients\">Clients </a></li> <li ng-class=\"{'active':active == 'contact'}\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.contact\">Contact</a></li> <li ng-class=\"{'active':active == 'login'}\" ng-show=\"!$root.userInfo || !$root.userInfo.Id\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.login\">Sign In</a></li> <li ng-class=\"{'active':active == 'logout'}\" ng-show=\"$root.userInfo && $root.userInfo.Id\"><a class=\"page-scroll\" page-scroll ui-sref=\"bitraz.main.logout\">Log Out</a></li> </ul> </div> </div> </nav>");
 }]);
 
 angular.module("views/index/login.html", []).run(["$templateCache", function($templateCache) {

@@ -42,24 +42,27 @@ angular.module("views/common/dashboard/dashboard_tmpl.html", []).run(["$template
 
 angular.module("views/common/directives/analytics_layout.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("views/common/directives/analytics_layout.html",
-    "<section class=\"anlaytics-layout-container \">\n" +
+    "<section class=\"anlaytics-layout-container \" style=\"padding-top:0px;\">\n" +
+    "    <div class=\"refresh-block pull-right\" style=\"padding-bottom: 5px;\">\n" +
+    "        View Refreshes in {{$ctrl.timeLeft}} Seconds <a ng-click=\"$ctrl.resetTime()\"><i class=\"fa fa-refresh\"></i></a>\n" +
+    "    </div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"panel panel-default\">\n" +
     "                <div class=\"panel-body tile_count\">\n" +
     "                    <div class=\"col-md-4 col-sm-4 col-xs-4 tile_stats_count\">\n" +
     "                        <span class=\"count_top\"><i class=\"fa fa-eye\"></i> Total Visits</span>\n" +
-    "                        <div class=\"count\" id=\"visits_total\">0</div>\n" +
+    "                        <div class=\"count\" id=\"visits_total\">{{$ctrl.summary.visits}}</div>\n" +
     "                        <span class=\"count_bottom\"><i class=\"green\"><span id=\"visits_percentage\"></span>% </i> From last day</span>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-4 col-sm-4 col-xs-4 tile_stats_count\">\n" +
     "                        <span class=\"count_top\"><i class=\"fa fa-user\"></i> Unique User Visits</span>\n" +
-    "                        <div class=\"count\" id=\"unique_users_total\">0</div>\n" +
+    "                        <div class=\"count\" id=\"unique_users_total\">{{$ctrl.summary.unique_users}}</div>\n" +
     "                        <span class=\"count_bottom\"><i class=\"green\"><span id=\"unique_users_percentage\"></span>% </i> From last day</span>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-md-4 col-sm-4 col-xs-4 tile_stats_count\">\n" +
     "                        <span class=\"count_top\"><i class=\"fa fa-users\"></i> Total Users</span>\n" +
-    "                        <div class=\"count green\" id=\"total_users\">0</div>\n" +
+    "                        <div class=\"count green\" id=\"total_users\">{{$ctrl.summary.total_users}}</div>\n" +
     "                        <span class=\"count_bottom\">&nbsp;</span>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -69,7 +72,7 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"panel panel-default\">\n" +
-    "                <div class=\"row\">\n" +
+    "                <div class=\"panel-body\">\n" +
     "                    <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "                        <div class=\"dashboard_graph\">\n" +
     "\n" +
@@ -104,7 +107,7 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"panel panel-default\">\n" +
-    "                <div class=\"row\">\n" +
+    "                <div class=\"panel-body\">\n" +
     "                    <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "                        <div class=\"dashboard_graph\">\n" +
     "\n" +
@@ -119,12 +122,6 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "                                    <highchart id=\"world-map-gdp\" config=\"locationConfig\" class=\"columnscol-md-12 col-sm-12 col-xs-12\" style=\"height: 400px\">\n" +
     "\n" +
     "                                    </highchart>\n" +
-    "                                    <!--<div id=\"world-map-gdp2\" class=\"columnscol-md-12 col-sm-12 col-xs-12\" style=\"height: 400px\" >-->\n" +
-    "                                        <!--<div class=\"loading\">-->\n" +
-    "                                            <!--<i class=\"icon-spinner icon-spin icon-large\"></i>-->\n" +
-    "                                            <!--Loading data from Google Spreadsheets...-->\n" +
-    "                                        <!--</div>-->\n" +
-    "                                    <!--</div>-->\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "\n" +
@@ -139,20 +136,20 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
     "            <div class=\"panel panel-default\">\n" +
-    "                <div class=\"row\">\n" +
+    "                <div class=\"panel-body\">\n" +
     "                    <div class=\"col-md-6 col-sm-6 col-xs-6\">\n" +
     "                        <div class=\"dashboard_graph \">\n" +
     "\n" +
     "                            <div class=\"row x_title\">\n" +
-    "                                <div class=\"col-md-12\">\n" +
+    "                                <div class=\"col-md-12 text-center\">\n" +
     "                                    <h3>Devices</h3>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"row\">\n" +
     "                                <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
-    "                                    <div id=\"placeholder33\" style=\"height: 260px; display: none\" class=\"demo-placeholder\"></div>\n" +
+    "                                    <!--<div id=\"placeholder33\" style=\"height: 360px; display: none\" class=\"demo-placeholder\"></div>-->\n" +
     "                                    <div style=\"width: 100%;\">\n" +
-    "                                        <highchart id=\"devices-chart\" config=\"deviceConfig\" class=\"col-md-8 col-sm-12 col-xs-12\" style=\"height:230px;\"></highchart>\n" +
+    "                                        <highchart id=\"devices-chart\" config=\"deviceConfig\"  style=\"height:300px;\"></highchart>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
@@ -164,15 +161,15 @@ angular.module("views/common/directives/analytics_layout.html", []).run(["$templ
     "                        <div class=\"dashboard_graph \">\n" +
     "\n" +
     "                            <div class=\"row x_title\">\n" +
-    "                                <div class=\"col-md-12\">\n" +
+    "                                <div class=\"col-md-12 text-center\">\n" +
     "                                    <h3>Platforms</h3>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"row\">\n" +
     "                                <div class=\"col-md-12 col-sm-12 col-xs-12\">\n" +
-    "                                    <div id=\"placeholder33\" style=\"height: 260px; display: none\" class=\"demo-placeholder\"></div>\n" +
+    "                                    <!--<div id=\"placeholder33\" style=\"height: 360px; display: none\" class=\"demo-placeholder\"></div>-->\n" +
     "                                    <div style=\"width: 100%;\">\n" +
-    "                                        <highchart id=\"platform-chart\" config=\"platformConfig\" class=\"col-md-8 col-sm-12 col-xs-12\" style=\"height:230px;\"></highchart>\n" +
+    "                                        <highchart id=\"platform-chart\" config=\"platformConfig\" style=\"height:300px;\"></highchart>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +

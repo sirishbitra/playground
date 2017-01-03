@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css"/>
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css"/>
+    <!--<link rel="stylesheet" href="bower_components/highcharts/css/highcharts.css"/>-->
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -23,6 +27,17 @@
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/helper.css"/>
     <link rel="stylesheet" href="styles/style.css">
     <!-- endbuild -->
+
+    <script type="application/javascript">
+        (function () {
+            window.appConfig = {
+                env:'local',
+                appPath: '',
+                apiUrl: '',
+                userInfo: {Id: null, UserName: '', isAdmin: false, isClient: false, isReadOnly: true}
+            }
+        })();
+    </script>
 
 </head>
 
@@ -50,7 +65,8 @@
 <!-- build:js(.) scripts/vendor.js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/highcharts/js/highstock.js"></script>
+<script src="bower_components/highcharts/highcharts.js"></script>
+<!--<script src="bower_components/highcharts/highmaps.js"></script>-->
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -75,8 +91,9 @@
 <script src="bower_components/highcharts/modules/map.js"></script>
 <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
-<script src="bower_components/highcharts/js/themes/dark-blue.js"></script>
+<!--<script src="bower_components/highcharts/themes/dark-blue.js"></script>-->
 
+<script src="scripts/utils/ext/world.js"></script>
 <!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -90,9 +107,11 @@
 
 <script src="scripts/services/index/index_services.js"></script>
 <script src="scripts/services/common/auth_service.js"></script>
+<script src="scripts/services/common/rid_service.js"></script>
 
 <script src="scripts/directives/index/index_directives.js"></script>
 <script src="scripts/directives/common/common_directives.js"></script>
+<script src="scripts/directives/common/analytics/layout/analytics_layout.js"></script>
 
 <!-- endbuild -->
 

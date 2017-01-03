@@ -53,12 +53,11 @@ module.exports = function (grunt) {
         // Compile less to css
         less: {
             development: {
+                src: ['app/less/style.less'],
+                dest: 'app/styles/style.css',
                 options: {
                     compress: true,
                     optimization: 2
-                },
-                files: {
-                    "app/styles/style.css": "app/less/style.less"
                 }
             }
         },
@@ -132,7 +131,6 @@ module.exports = function (grunt) {
                             '*.{ico,png,txt}',
                             '.htaccess',
                             'index.html',
-                            'login.html',
                             'views/common/{,*/}*.html',
                             'views/index/{,*/}*.html',
                             'styles/img/*.*',
@@ -180,7 +178,6 @@ module.exports = function (grunt) {
                             '*.{ico,png,txt}',
                             '.htaccess',
                             'admin.html',
-                            'login.html',
                             'views/common/{,*/}*.html',
                             'views/admin/{,*/}*.html',
                             'styles/img/*.*',
@@ -228,7 +225,6 @@ module.exports = function (grunt) {
                             '*.{ico,png,txt}',
                             '.htaccess',
                             'analytics.html',
-                            'login.html',
                             'views/common/{,*/}*.html',
                             'views/analytics/{,*/}*.html',
                             'styles/img/*.*',
