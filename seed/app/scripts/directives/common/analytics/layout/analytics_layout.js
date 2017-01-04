@@ -324,7 +324,7 @@ angular.module("bitraz")
       };
 
       var tickInterval = 1000;
-      var timeLimit = 10;
+      var timeLimit = 60;
 
       $ctrl.tick = () => {
         $ctrl.timeLeft--;
