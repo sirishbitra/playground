@@ -29,6 +29,7 @@ function HeaderController($rootScope, $scope, $state, AuthService, appConfig) {
 function HomeController($http, $scope) {}
 function AnalyticsController($http, $scope) {
   $scope.test = {};
+  
 }
 function CampaignsController($http, $scope) {}
 function ArchievesController($http, $scope) {}

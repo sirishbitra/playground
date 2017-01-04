@@ -11,11 +11,11 @@ angular.module('bitraz.rid', ["ngResource"])
         },
         getSummary: {
           method: 'GET',
-          url: appConfig.apiEndPoint + '/api/Analytics/GETSUMMARY'
+          url: appConfig.apiEndPoint + '/api/AnalyticsApi/GETSUMMARY'
         },
         getCounts: {
           method: 'GET',
-          url: appConfig.apiEndPoint + '/api/Analytics/GETALLCOUNTS'
+          url: appConfig.apiEndPoint + '/api/AnalyticsApi/GETALLCOUNTS'
         }
       }, {
         stripTrailingSlashes: false
