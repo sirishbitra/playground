@@ -27,7 +27,25 @@ function HeaderController($rootScope, $scope, $state, AuthService, appConfig) {
   })
 }
 function HomeController($http, $scope) {}
-function AnalyticsController($http, $scope) {}
+function AnalyticsController($http, $scope, RidService, $state, $timeout) {
+  $scope.rid = {};
+  $scope.isLoaded = false;
+  $scope.init = () => {
+    $scope.rid.id = $state.params.rid || null;
+    // $scope.hasAuthentication = false;
+    // $scope.isAuthorized = false;
+
+    // if($scope.rid.id){
+    //   $scope.validateRid();
+    // }else{
+      $scope.isLoaded = true;
+    //}
+    
+    
+  };
+
+  $scope.init();
+}
 function CampaignsController($http, $scope) {}
 function ArchievesController($http, $scope) {}
 function SettingsController($http, $scope) {}

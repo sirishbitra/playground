@@ -50,7 +50,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
       }
     })
     .state('bitraz.main.analytics', {
-      url: "/analytics",
+      url: "/analytics?rid",
       data: {
         pageTitle: 'Analytics',
         activeMenu:'analytics'

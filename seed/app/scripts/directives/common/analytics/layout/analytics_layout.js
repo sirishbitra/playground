@@ -6,7 +6,7 @@ angular.module("bitraz")
     },
     controller: ["$scope", "$rootScope", "$uibModal", "$timeout", "highchartsNG", "RidService", function ($scope, $rootScope, $uibModal, $timeout, highchartsNG, RidService) {
       let $ctrl = this;
-    console.log('analytics layout', $uibModal);
+    console.log('analytics layout', $ctrl.campaignId);
 
       $scope.data = {
         "activity": [],
