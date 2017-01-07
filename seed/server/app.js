@@ -79,6 +79,9 @@ app.all("*", function (req, res, next) {
  else if( /\/Auth\/Login/.exec(p)){
    var user = require("./mock_data/chance/user");
    res.json( user.login(req) );
+ } else if( /\/Auth\/Logout/.exec(p)){
+   var user = require("./mock_data/chance/user");
+   res.json( user.logout(req) );
  }
   else{
     console.log("P:" + p + req.query.portfolio);

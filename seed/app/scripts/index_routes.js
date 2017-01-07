@@ -101,7 +101,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
           },
           views: {
             "body@bitraz": {
-              templateUrl: "views/index/login.html",
+              templateUrl: "views/common/login.html",
               controller: "LoginController"
             }
           }
@@ -111,8 +111,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
           data: {
             pageTitle: 'Analytics',
             specialClass: 'landing-page',
-            activeMenu:'analytics',
-            requiresLogin: true
+            activeMenu:'analytics'
+
           },
 
           views: {
@@ -146,18 +146,18 @@ angular.module('routes', [
     .run(function($rootScope, $state, appConfig, $location) {
         $rootScope.$state = $state;
         $rootScope.userInfo = appConfig.userInfo;
-        // $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams, fromState, fromStateParams) {
-// console.log(toState, toStateParams, fromState, fromStateParams, $location)
-          // var isAuthenticationRequired = toState.data
-          //   && toState.data.requiresLogin
-          //   && ( _.isNull($rootScope.userInfo && $rootScope.userInfo.Id) || _.isUndefined($rootScope.userInfo && $rootScope.userInfo.Id) );
-          //
-          // if ( isAuthenticationRequired ) {
-          //   event.preventDefault();
-          //   console.log("#!" + $location.$$url)
-          //   $state.go('bitraz.main.login', {redirect_url: $location.$$absUrl});
-          // }
-        // });
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toStateParams, fromState, fromStateParams) {
+console.log(toState, toStateParams, fromState, fromStateParams, $location)
+          var isAuthenticationRequired = toState.data
+            && toState.data.requiresLogin
+            && ( _.isNull($rootScope.userInfo && $rootScope.userInfo.Id) || _.isUndefined($rootScope.userInfo && $rootScope.userInfo.Id) );
+
+          if ( isAuthenticationRequired ) {
+            event.preventDefault();
+            console.log("#!" + $location.$$url)
+            $state.go('bitraz.main.login', {redirect_url: $location.$$absUrl});
+          }
+        });
 
 
 

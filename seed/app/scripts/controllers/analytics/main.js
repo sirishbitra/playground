@@ -5,7 +5,7 @@
  */
 
 angular
-    .module('bitraz.controllers', [])
+  .module('bitraz.controllers', ['bitraz.auth', 'bitraz.common.controllers'])
     .controller('appCtrl', appCtrl)
     .controller('AppController', AppController)
     .controller('HeaderController', HeaderController)
@@ -18,13 +18,20 @@ angular
 
 
 function AppController($http, $scope) {}
-function HeaderController($rootScope, $scope, $state, AuthService, appConfig) {
+function HeaderController($rootScope, $scope, $state, AuthService, appConfig, $window) {
   console.log('HeaderController', $state, AuthService, appConfig)
   $scope.active = $state.current.data.activeMenu;
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams, fromState, fromStateParams) {
     $scope.active = toState.data.activeMenu;
-  })
+  });
+  
+  $scope.logout = () => {
+    AuthService.logout().$promise.then((res)=>{
+      $window.location.href = '/';
+      $rootScope.userInfo = {};
+    }, (err)=>{})
+  }
 }
 function HomeController($http, $scope) {}
 function AnalyticsController($http, $scope, RidService, $state, $timeout) {

@@ -40,7 +40,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
 
       data: {
         pageTitle: 'Home',
-        activeMenu:'home'
+        activeMenu:'home',
+        requiresLogin: true
       },
       views: {
         "body@bitraz": {
@@ -53,7 +54,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
       url: "/analytics?rid",
       data: {
         pageTitle: 'Analytics',
-        activeMenu:'analytics'
+        activeMenu:'analytics',
+        requiresLogin: true
       },
       views: {
         "body@bitraz": {
@@ -66,7 +68,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
       url: "/campaigns",
       data: {
         pageTitle: 'Campaigns',
-        activeMenu:'campaigns'
+        activeMenu:'campaigns',
+        requiresLogin: true
       },
       views: {
         "body@bitraz": {
@@ -79,7 +82,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
       url: "/users",
       data: {
         pageTitle: 'Users',
-        activeMenu:'users'
+        activeMenu:'users',
+        requiresLogin: true
       },
       views: {
         "body@bitraz": {
@@ -92,7 +96,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
       url: "/archieves",
       data: {
         pageTitle: 'Archieves',
-        activeMenu:'archieves'
+        activeMenu:'archieves',
+        requiresLogin: true
       },
       views: {
         "body@bitraz": {
@@ -105,12 +110,27 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $urlM
       url: "/settings",
       data: {
         pageTitle: 'Settings',
-        activeMenu:'settings'
+        activeMenu:'settings',
+        requiresLogin: true
       },
       views: {
         "body@bitraz": {
           templateUrl: "views/analytics/settings.html",
           controller: "SettingsController"
+        }
+      }
+    })
+    .state('bitraz.main.login', {
+      url: "/login?redirect_url",
+      data: {
+        pageTitle: 'Login',
+        specialClass: 'landing-page',
+        activeMenu:'login'
+      },
+      views: {
+        "body@bitraz": {
+          templateUrl: "views/common/login.html",
+          controller: "LoginController"
         }
       }
     })
@@ -134,6 +154,19 @@ angular.module('routes', [
   "bitraz.template"
 ])
   .config(configState)
-  .run(function($rootScope, $state) {
+  .run(function($rootScope, $state, appConfig, $location) {
     $rootScope.$state = $state;
+    $rootScope.userInfo = appConfig.userInfo;
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toStateParams, fromState, fromStateParams) {
+      console.log(toState, toStateParams, fromState, fromStateParams, $location)
+      var isAuthenticationRequired = toState.data
+        && toState.data.requiresLogin
+        && ( _.isNull($rootScope.userInfo && $rootScope.userInfo.Id) || _.isUndefined($rootScope.userInfo && $rootScope.userInfo.Id) );
+
+      if ( isAuthenticationRequired ) {
+        event.preventDefault();
+        console.log("#!" + $location.$$url)
+        $state.go('bitraz.main.login', {redirect_url: $location.$$absUrl});
+      }
+    });
   });
