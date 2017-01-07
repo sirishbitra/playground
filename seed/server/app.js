@@ -75,6 +75,11 @@ app.all("*", function (req, res, next) {
    var rid = require("./mock_data/chance/analytics");
    res.json( rid.getCounts() );
  }
+
+ else if( /\/Auth\/Login/.exec(p)){
+   var user = require("./mock_data/chance/user");
+   res.json( user.login(req) );
+ }
   else{
     console.log("P:" + p + req.query.portfolio);
     res.sendFile( "index.html", {root: ".", headers: accessObject} );
