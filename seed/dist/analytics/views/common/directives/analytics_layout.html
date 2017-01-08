@@ -8,59 +8,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4">
-            <div class="hpanel">
-                <div class="panel-body text-center h-200">
-                    <i class="pe-7s-graph1 fa-4x"></i>
-
-                    <h1 class="m-xs">{{$ctrl.summary.visits}}</h1>
-
-                    <h3 class="font-extra-bold no-margins text-success">
-                        Total Visits
-                    </h3>
-                    <small>Total visits to the campaign.</small>
-                </div>
-                <!--<div class="panel-footer">-->
-                <!--This is standard panel footer-->
-                <!--</div>-->
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="hpanel">
-                <div class="panel-body text-center h-200">
-                    <i class="fa fa-user-o fa-4x"></i>
-
-                    <h1 class="m-xs">{{$ctrl.summary.unique_users}}</h1>
-
-                    <h3 class="font-extra-bold no-margins text-success">
-                        Unique User Visits
-                    </h3>
-                    <small>unique users visited to campaign.</small>
-                </div>
-                <!--<div class="panel-footer">-->
-                <!--This is standard panel footer-->
-                <!--</div>-->
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="hpanel">
-                <div class="panel-body text-center h-200">
-                    <i class="fa fa-users fa-4x"></i>
-
-                    <h1 class="m-xs">{{$ctrl.summary.total_users}}</h1>
-
-                    <h3 class="font-extra-bold no-margins text-success">
-                        Total Users
-                    </h3>
-                    <small>Total users visited to campaign.</small>
-                </div>
-                <!--<div class="panel-footer">-->
-                <!--This is standard panel footer-->
-                <!--</div>-->
-            </div>
-        </div>
+        <dashboard-layout config="$ctrl.dashboardConfig"></dashboard-layout>
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">

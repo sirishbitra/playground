@@ -298,6 +298,11 @@ angular.module("bitraz")
       };
 
       $ctrl.loadData = (params) => {
+        $ctrl.dashboardConfig = {
+          type:'campaign',
+          userId: $rootScope.userInfo.Id,
+          campaignId: params.campaignId
+        };
         RidService.getSummary({Uniqueid: params.campaignId}).$promise.then((resp)=>{
           $ctrl.summary = resp;
           $ctrl.reflow();

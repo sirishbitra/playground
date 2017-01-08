@@ -13,7 +13,8 @@ angular.module('routes', [
   'daterangepicker',
   'highcharts-ng',
   'bitraz.rid',
-  "bitraz.template"
+  "bitraz.template",
+  "bitraz.dashboard"
 ]).config(["$stateProvider", "$httpProvider", "$compileProvider",
     "$urlRouterProvider", "$urlMatcherFactoryProvider",
     function ($stateProvider, $httpProvider, $compileProvider, $urlRouterProvider,
@@ -60,7 +61,7 @@ angular.module('routes', [
           data: {
             pageTitle: 'Home',
             activeMenu:'home',
-            requiresLogin: true
+            // requiresLogin: true
           },
           views: {
             "body@bitraz": {
@@ -158,6 +159,7 @@ angular.module('routes', [
   .run(function($rootScope, $state, appConfig, $location) {
     $rootScope.$state = $state;
     $rootScope.userInfo = appConfig.userInfo;
+    $rootScope.pageLoading = false;
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toStateParams, fromState, fromStateParams) {
       console.log(toState, toStateParams, fromState, fromStateParams, $location)
       var isAuthenticationRequired = toState.data

@@ -1,6 +1,7 @@
 angular
     .module('bitraz.directives.common', [])
     .directive('pageTitle', pageTitle)
+    .directive('splashScreen', splashScreen)
     .directive('sideNavigation', sideNavigation)
     .directive('minimalizaMenu', minimalizaMenu)
     .directive('sparkline', sparkline)
@@ -28,6 +29,25 @@ function pageTitle($rootScope, $timeout) {
                 });
             };
             $rootScope.$on('$stateChangeStart', listener);
+        }
+    }
+};
+
+/**
+ * splashScreen - Directive to handle loading splash
+ */
+function splashScreen($rootScope, $timeout) {
+    return {
+        restrict: 'C',
+        link: function(scope, element) {
+            var listener = function(nv, ov) {
+                if(nv != ov && nv){
+                    $(element).css('display', 'block');
+                }else if(nv != ov && !nv){
+                    $(element).css('display', 'none');
+                }
+            };
+            $rootScope.$watch('pageLoading', listener);
         }
     }
 };

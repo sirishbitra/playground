@@ -33,7 +33,23 @@ function HeaderController($rootScope, $scope, $state, AuthService, appConfig, $w
     }, (err)=>{})
   }
 }
-function HomeController($http, $scope) {}
+function HomeController($http, $scope, $rootScope) {
+
+  $scope.dashboardConfig = {
+    userId: $rootScope.userInfo.Id,
+    type: 'all',
+    modules:[
+      {name: 'urlGenerated', rank:1, span:1},
+      {name: 'totalUsers', rank:1, span:1},
+      {name: 'totalVisits', rank:1, span:1},
+      {name: 'totalCampaigns', rank:1, span:1},
+      {name: 'totalAnalyticVisits', rank:1, span:1},
+      {name: 'recentCampaigns', rank:1, span:2},
+      {name: 'totalActivity', rank:1, span:1}
+    ]
+  }
+
+}
 function AnalyticsController($http, $scope, RidService, $state, $timeout) {
   $scope.rid = {};
   $scope.isLoaded = false;

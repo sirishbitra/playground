@@ -2,41 +2,24 @@ var chance = require("chance").Chance();
 
 exports.getSummary = function(query){
   return {
-    "url": "http://localhost:55492/x",
-    "visits": 2,
-    "unique_users": 1,
-    "total_users": 1
-  };
+    totalUrls: 123123,
+    users:{total:123, uniqueUsers:123, uniqueUsersToday: 12, usersToday: 123,  uniqueUsersYesterday: 12, usersYesterday: 123,  uniqueUsersWeek: 12, usersWeek: 123 },
+    visits:{total:1, uniqueVisits: 12, visitsToday:12, uniqueVisitsToday:123, visitsYesterday:123, uniqueVisitsYesterday:123, uniqueVisitsWeek:123, visitsWeek:123},
+    campaigns:{total:24, campaignsWeek:2, campaignsMonth:24},
+    loggedInUsers:{total:1, totalToday:0, totalYesterday:0, totalWeek:0},
+    recentCampaigns:[
+      {id:1, rid:123, title:null, createdOn:'12/12/2000', inActiveDate:'', visits:123, users: 123, status:'Active'},
+      {id:2, rid:234, title:"test 123", createdOn:'01/05/2001', inActiveDate:'01/10/2001', visits:123, users: 123, status:'InActive'},
+      {id:3, rid:234, title:"test 123", createdOn:'01/05/2001', inActiveDate:'01/10/2001', visits:123, users: 123, status:'Archieve'}
+    ],
+    activities:{
+      today:{urlTotal:12, urlPercent:12, visitsTotal:1, visitsPercent:2, revisitsTotal:1, revisitsPercent:2, noVisitsTotal:1, noVisitsPercent:2},
+      week:{urlTotal:23, urlPercent:1, visitsTotal:1, visitsPercent:2, revisitsTotal:1, revisitsPercent:2, noVisitsTotal:1, noVisitsPercent:2},
+      month:{urlTotal:2, urlPercent:2, visitsTotal:1, visitsPercent:2, revisitsTotal:1, revisitsPercent:2, noVisitsTotal:1, noVisitsPercent:2}}
+  }
 };
 
 exports.getCounts = function(query){
-  // return {
-  //   "activity": [
-  //     {
-  //       "RequestedDate": "2016-12-10T10:00:00",
-  //       "Hour": 0,
-  //       "RequestCount": 1
-  //     }],
-  //   "locations": [
-  //     {
-  //       "code": "",
-  //       "value": 2,
-  //       "name": ""
-  //     }],
-  //   "devices": [
-  //     {
-  //       "name": "WinNT",
-  //       "y": 2
-  //     }
-  //   ],
-  //   "platforms": [
-  //     {
-  //       "name": "Chrome",
-  //       "y": 2
-  //     }
-  //   ]
-  // }
-
   var data = {
     "activity": [
       [

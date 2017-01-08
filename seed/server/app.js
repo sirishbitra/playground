@@ -66,12 +66,12 @@ app.all("*", function (req, res, next) {
     res.json( rid.post() );
   }
 
- else if( /\/api\/Analytics\/GETSUMMARY/.exec(p)){
+ else if( /\/api\/AnalyticsApi\/GETSUMMARY/.exec(p)){
    var rid = require("./mock_data/chance/analytics");
    res.json( rid.getSummary() );
  }
 
- else if( /\/api\/Analytics\/GETALLCOUNTS/.exec(p)){
+ else if( /\/api\/AnalyticsApi\/GETALLCOUNTS/.exec(p)){
    var rid = require("./mock_data/chance/analytics");
    res.json( rid.getCounts() );
  }
