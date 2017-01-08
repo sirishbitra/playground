@@ -61,7 +61,7 @@ angular.module('routes', [
           data: {
             pageTitle: 'Home',
             activeMenu:'home',
-            // requiresLogin: true
+            requiresLogin: true
           },
           views: {
             "body@bitraz": {
