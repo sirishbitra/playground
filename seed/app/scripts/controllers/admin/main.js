@@ -50,7 +50,7 @@ function HomeController($http, $scope, $rootScope) {
   }
 
 }
-function AnalyticsController($http, $scope) {
+function AnalyticsController($state, $scope) {
   $scope.rid = {};
   $scope.isLoaded = false;
   $scope.init = () => {
