@@ -11,7 +11,7 @@
             if (window.appConfig.env == 'prod') {
                 return window.appConfig.appUrl || {admin: window.appConfig.apiUrl+'/Admin', analytics: window.appConfig.apiUrl+'/Analytics', landing: window.appConfig.apiUrl+'/Home'};
             } else if (window.appConfig.env == 'dev') {
-                return {admin: (window.appConfig.appUrl && window.appConfig.appUrl.admin) || 'http://localhost:3301/admin/admin.html', analytics: (window.appConfig.appUrl && window.appConfig.appUrl.analytics) || 'http://localhost:3301/analytics/analytics.html', landing: (window.appConfig.appUrl && window.appConfig.appUrl.landing) || 'http://localhost:3301/index.html'};
+                return {admin: (window.appConfig.apiUrl && window.appConfig.apiUrl.admin) || 'http://localhost:3301/admin/admin.html', analytics: (window.appConfig.apiUrl && window.appConfig.apiUrl.analytics) || 'http://localhost:3301/analytics/analytics.html', landing: (window.appConfig.apiUrl && window.appConfig.apiUrl.landing) || 'http://localhost:3301/index.html'};
             } else {
                 return {admin: 'http://localhost:3301/admin.html', analytics: 'http://localhost:3301/analytics.html', landing: 'http://localhost:3301/index.html'};
             }
